@@ -33,7 +33,7 @@
  * in Arduino/libraries/My_Fonts folder which you would create. We do not recommend putting it in
  * Arduino/libraries/Fonts in case you ever need to delete and reinstall the GFX Library.
  */
-#include "UISymbolSans18pt7b.h"
+#include "Fonts/UISymbolSans18pt7b.h"
 
 /*
  * The font collection joins these fonts at relative sizes of 1x.

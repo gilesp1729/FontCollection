@@ -105,11 +105,11 @@ void FontCollection::print(char c)
 {
   const GFXfont *gfxFont;
   int textsize;
-  int cursor_x = _gfx->getCursorX();
-  int cursor_y = _gfx->getCursorY();
 
   if (find_font(c, &gfxFont, &textsize))
   {
+    int cursor_x = _gfx->getCursorX();
+    int cursor_y = _gfx->getCursorY();
     if (!gfxFont)
     { // 'Classic' built-in font
       _gfx->drawChar(cursor_x, cursor_y, c, _textcolor, _textcolor, textsize);

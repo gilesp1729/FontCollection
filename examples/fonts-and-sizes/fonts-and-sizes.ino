@@ -26,9 +26,6 @@ FontCollection fc18(&display, &FreeSans18pt7b, &UISymbolSans18pt7b, 1, 1);
 #include "fonts/UISymbolSans12pt7b.h"
 FontCollection fc12(&display, &FreeSans12pt7b, &UISymbolSans12pt7b, 1, 1);
 
-// This one is for 18pt symbols with a 3x default system font.
-FontCollection fc18d(&display, NULL, &UISymbolSans18pt7b, 3, 1);
-
 // This one is for 24pt Sans
 #include <fonts/FreeSans24pt7b.h>
 #include "fonts/UISymbolSans24pt7b.h"
@@ -88,19 +85,6 @@ void setup()
   fc18.print("Symbol font \x8\x19");
   //fc18.print((char)8);
   //fc18.print((char)25);
-
-  y += 40;
-  if (y > DHEIGHT)
-    return;
-  fc18d.getTextBounds("System font 3x", x, y, &xr, &yr, &wr, &hr);
-  display.drawRect(xr, yr, wr, hr, GREY);
-  display.setCursor(x, y);
-  fc18d.print("System font 3x");
-  y += 40;
-  fc18d.getTextBounds("Symbol font \x8\x19", x, y, &xr, &yr, &wr, &hr);
-  display.drawRect(xr, yr, wr, hr, GREY);
-  display.setCursor(x, y);
-  fc18d.print("Symbol font \x8\x19");
 
   y += 50;
   if (y > DHEIGHT)

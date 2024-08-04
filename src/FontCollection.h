@@ -19,8 +19,10 @@
 
 // Passing NULL for the text font will use the system font, but be careful
 // of the text sizes. Usually the text and symbol sizes are the same, but the
-// system font requires a larger size to be compatible.
+// system font requires a larger size to be compatible since it starts at only 6 pixels.
 // e.g. GU_FontCollection(&gfx, NULL, &some_symbol_font, 3, 1)
+// There is also a problem with the Y baseline, which is intractable. So mixing
+// the default font and symbol fonts is not recommended (and it looks rubbish)
 
 // Passing NULL for the symbol font is OK if you are not using symbols.
 
@@ -32,7 +34,7 @@ public:
   FontCollection(Adafruit_GFX *gfx, const GFXfont *text_font, const GFXfont *symbol_font, int tsize = 1, int ssize = 1)
     {_gfx = gfx; _text_font = text_font; _symbol_font = symbol_font; _textsize = tsize; _symsize = ssize; }
   ~FontCollection() { }
-  
+
   // This public so others can see it
   Adafruit_GFX *_gfx;
 
@@ -60,7 +62,7 @@ private:
   int _multiplier = 1;
   uint16_t _textcolor = 0xFFFF;
 
-  // Find the font to be used for a character code. 
+  // Find the font to be used for a character code.
   // Set the font in GFX and return its ptr and size.
   // Return false if the code cannot be found in any font.
   bool find_font(char ch, const GFXfont **curr_font, int *curr_size);

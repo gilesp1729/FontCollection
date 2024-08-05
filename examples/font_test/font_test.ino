@@ -13,8 +13,8 @@
 //#define USE_HX8357    //3.5 inch 480x320 TFT Feather Wing
 //#define USE_HALLOWING //Adafruit Hallowing M0 Express
 //#define USE_PYGAMER   //Adafruit PyGamer M4 Express
-//#define USE_GIGA_GFX    // Arduino Giga R1 and its display
-#define USE_MCUFRIEND     // 2.8 inch MCUFRIEND displays
+#define USE_GIGA_GFX    // Arduino Giga R1 and its display
+//#define USE_MCUFRIEND     // 2.8 inch MCUFRIEND displays
 #include "board_select.h"
 #include "FontCollection.h"
 
@@ -85,9 +85,6 @@ void Show(void)  {
   uint8_t Glyph;
   for (Glyph = First_Glyph; Glyph <= Last_Glyph; Glyph++) 
   {
-    //fc.setTextSize(Magnifier);
-    //fc.setTextColor(COLOR_WHITE);
-    //display.setCursor((I % Max_C) * delta_c * Magnifier, (base_r*Magnifier) + (I / Max_C) * delta_r * Magnifier);
     fc.drawText
     (
       Glyph, 
@@ -112,7 +109,7 @@ void setup() {
   // Get cell size from 'M' size in the text font
   int16_t x1, y1;
   uint16_t w, h;
-  fc.getTextBounds("M", 0, 0, &x1, &y1, &delta_c, &delta_r);
+  fc.getTextBounds("M", 0, 0, &x1, &y1, &delta_c, &delta_r, Magnifier);
   delta_c += 8;
   delta_r += 6;
   base_r = delta_c - 3;

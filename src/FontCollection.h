@@ -67,7 +67,11 @@ public:
 
 
   // Get the bounding rectangle of a string
-  void getTextBounds(const char *string, int16_t xpos, int16_t ypos, int16_t *x, int16_t *y, uint16_t *w, uint16_t *h);
+  void getTextBounds(const char *string,
+                    int16_t xpos, int16_t ypos,
+                    int16_t *x, int16_t *y,
+                    uint16_t *w, uint16_t *h,
+                    uint8_t size_mult = 1);
 
 private:
   const GFXfont *_text_font;
@@ -85,7 +89,7 @@ private:
   // charBounds analog.
   void charBounds(unsigned char c, int16_t *x, int16_t *y,
                   int16_t *minx, int16_t *miny, int16_t *maxx,
-                  int16_t *maxy);
+                  int16_t *maxy, uint8_t size_mult = 1);
 };
 
 #endif // def FONT_COLLECTION_H

@@ -3,8 +3,8 @@
 //#define USE_HX8357    //3.5 inch 480x320 TFT Feather Wing
 //#define USE_HALLOWING //Adafruit Hallowing M0 Express
 //#define USE_PYGAMER   //Adafruit PyGamer M4 Express
-//#define USE_GIGA_GFX    //Arduino Giga R1 with display
-#define USE_MCUFRIEND     // 2.8 inch 240x320 MCUFRIEND displays
+#define USE_GIGA_GFX    //Arduino Giga R1 with display
+//#define USE_MCUFRIEND     // 2.8 inch 240x320 MCUFRIEND displays
 #include "board_select.h"
 
 // Example program for font collections. Shows mixed font strings,
@@ -91,12 +91,12 @@ void setup()
   y += 80;
   if (y > DHEIGHT)
     return;
-  fc24.getTextBounds("24 Sans double", x, y, &xr, &yr, &wr, &hr);
+  fc24.getTextBounds("24 Sans double", x, y, &xr, &yr, &wr, &hr, 2);
   display.drawRect(xr, yr, wr, hr, GREY);
   display.setCursor(x, y);
-  fc24.drawText("24 Sans double", x, y, WHITE, 2);      // Double size
+  fc24.drawText("24 Sans double", x, y, WHITE, 2);
   y += 80;
-  fc24.getTextBounds("Symbol font \x8\x19", x, y, &xr, &yr, &wr, &hr);
+  fc24.getTextBounds("Symbol font \x8\x19", x, y, &xr, &yr, &wr, &hr, 2);
   display.drawRect(xr, yr, wr, hr, GREY);
   fc24.drawText("Symbol font \x8\x19", x, y, WHITE, 2);
 }

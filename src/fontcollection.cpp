@@ -14,10 +14,12 @@
 // The X position is advanced by the character's advance width.
 void FontCollection::charBounds(unsigned char c, int16_t *x, int16_t *y,
                                   int16_t *minx, int16_t *miny, int16_t *maxx,
-                                  int16_t *maxy)
+                                  int16_t *maxy, uint8_t size_mult)
 {
   const GFXfont *gfxFont;
   int tsize;
+
+  _multiplier = size_mult;
 
   // Find the character's font. The font may be NULL, in which
   // case it is the default system font.
@@ -64,7 +66,8 @@ void FontCollection::charBounds(unsigned char c, int16_t *x, int16_t *y,
 // Get the bounding rectangle of a string, similar to getTextBounds.
 // No newlines or wrapping are supported.
 void FontCollection::getTextBounds(const char *string, int16_t xpos, int16_t ypos,
-                                    int16_t *x, int16_t *y, uint16_t *w, uint16_t *h)
+                                    int16_t *x, int16_t *y, uint16_t *w, uint16_t *h,
+                                    uint8_t size_mult)
 {
   int16_t minx = 0x7FFF, miny = 0x7FFF, maxx = -1, maxy = -1;
   GFXfont *curr_font;
@@ -74,7 +77,7 @@ void FontCollection::getTextBounds(const char *string, int16_t xpos, int16_t ypo
   *w = *h = 0;
   for (int i = 0; i < strlen(string); i++)
   {
-    charBounds(string[i], &xpos, &ypos, &minx, &miny, &maxx, &maxy);
+    charBounds(string[i], &xpos, &ypos, &minx, &miny, &maxx, &maxy, size_mult);
     if (maxx >= minx)
     {
       *x = minx;
@@ -91,7 +94,7 @@ void FontCollection::getTextBounds(const char *string, int16_t xpos, int16_t ypo
 // Draw a string at the given cursor location. Other variants ar in the header.
 // Not taking heed of newline or CR, since they may be valid symbol characters.
 void FontCollection::drawText(const char *string, int16_t xpos, int16_t ypos,
-                              uint16_t color, uint8_t size_mult = 1)
+                              uint16_t color, uint8_t size_mult)
 {
   const GFXfont *gfxFont;
   int textsize;
@@ -111,7 +114,7 @@ void FontCollection::drawText(const char *string, int16_t xpos, int16_t ypos,
 
 // Draw a single character.
 void FontCollection::drawText(uint8_t c, int16_t xpos, int16_t ypos,
-                              uint16_t color, uint8_t size_mult = 1)
+                              uint16_t color, uint8_t size_mult)
 {
   const GFXfont *gfxFont;
   int textsize;

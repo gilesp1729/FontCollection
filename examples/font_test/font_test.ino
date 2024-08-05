@@ -13,8 +13,8 @@
 //#define USE_HX8357    //3.5 inch 480x320 TFT Feather Wing
 //#define USE_HALLOWING //Adafruit Hallowing M0 Express
 //#define USE_PYGAMER   //Adafruit PyGamer M4 Express
-#define USE_GIGA_GFX    // Arduino Giga R1 and its display
-//#define USE_MCUFRIEND     // 2.8 inch MCUFRIEND displays
+//#define USE_GIGA_GFX    // Arduino Giga R1 and its display
+#define USE_MCUFRIEND     // 2.8 inch MCUFRIEND displays
 #include "board_select.h"
 #include "FontCollection.h"
 
@@ -33,7 +33,7 @@
  * in Arduino/libraries/My_Fonts folder which you would create. We do not recommend putting it in
  * Arduino/libraries/Fonts in case you ever need to delete and reinstall the GFX Library.
  */
-#include "Fonts/UISymbolSans18pt7b.h"
+#include <Fonts/UISymbolSans18pt7b.h>
 
 /*
  * The font collection joins these fonts at relative sizes of 1x.
@@ -81,16 +81,21 @@ void Show(void)  {
     }
   }
 
-  /*
-   * setTextSize() and print() go through the font collection, and setFont is handled internally.
-   * Cursor position (and other graphics) go directly to the display.
-   */
   uint8_t I=0;
-  for (uint8_t Glyph = First_Glyph; Glyph <= Last_Glyph; Glyph++) {
-    fc.setTextSize(Magnifier);
-    fc.setTextColor(COLOR_WHITE);
-    display.setCursor((I % Max_C) * delta_c * Magnifier, (base_r*Magnifier) + (I / Max_C) * delta_r * Magnifier);
-    fc.print((char)Glyph);
+  uint8_t Glyph;
+  for (Glyph = First_Glyph; Glyph <= Last_Glyph; Glyph++) 
+  {
+    //fc.setTextSize(Magnifier);
+    //fc.setTextColor(COLOR_WHITE);
+    //display.setCursor((I % Max_C) * delta_c * Magnifier, (base_r*Magnifier) + (I / Max_C) * delta_r * Magnifier);
+    fc.drawText
+    (
+      Glyph, 
+      (I % Max_C) * delta_c * Magnifier, 
+      (base_r*Magnifier) + (I / Max_C) * delta_r * Magnifier,
+      COLOR_WHITE, 
+      Magnifier
+    ); 
     I++;
   }
 }
